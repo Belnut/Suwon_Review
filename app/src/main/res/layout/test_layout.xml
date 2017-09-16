@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/suggestion_board_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue"
+        android:onClick="onClick"
+        android:text="sug_btn" />
+
+    <Button
+        android:id="@+id/sms_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue"
+        android:onClick="onClick"
+        android:text="sms_btn" />
+
+    <Button
+        android:id="@+id/filter_test_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue"
+        android:onClick="onClick"
+        android:text="filter" />
+
+</LinearLayout>
