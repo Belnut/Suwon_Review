@@ -31,10 +31,6 @@ public class Register extends Activity {
 
     EditText input_id, input_pwd, input_check_pwd, input_nickname, input_email;
 
-    //학생인지 주민인지 구분할 것 생각하기!
-    RadioGroup radio_gr;
-    RadioButton st_member, re_member;
-
     static int checked_overlap_id;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +42,6 @@ public class Register extends Activity {
         input_check_pwd = (EditText) findViewById(R.id.reg_check_pwd);
         input_nickname = (EditText) findViewById(R.id.reg_nickname);
         input_email = (EditText) findViewById(R.id.reg_email);
-        radio_gr = (RadioGroup) findViewById(R.id.radio_group);
-        st_member = (RadioButton)findViewById(R.id.student_radio);
-        re_member = (RadioButton)findViewById(R.id.resident_radio);
 
         //아이디가 텍스트 입력할때
         input_id.addTextChangedListener(new TextWatcher() {
@@ -101,36 +94,9 @@ public class Register extends Activity {
 
             }
         });
-
-        if(st_member.isChecked())
-            member = 1;
-        else if(re_member.isChecked())
-            member = 2;
-        radio_gr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-                switch(checkedId) {
-                    case R.id.student_radio:
-                        member = 1;
-                        break;
-                    case R.id.resident_radio:
-                        member = 2;
-                }
-            }
-        });
     }
 
     //각각 정규표현식
-    protected boolean checkStdnum(String str) {
-        boolean result = Pattern.matches("^[0-9]{8,8}$", str);
-
-        if (str.length() > 0 && result)
-            return true;
-        else
-            return false;
-    }
-
     protected boolean checkId(String str) {
         boolean result = Pattern.matches("^[a-zA-Z]{1}[a-zA-Z0-9]{4,11}$", str);
 
@@ -188,19 +154,10 @@ public class Register extends Activity {
                 break;
             }*/
             case R.id.reg_ok_btn: {
-                if(member == 1){
-                    if (!checkStdnum(input_id.getText().toString())) {
-                        Toast.makeText(getApplicationContext(), "학번을 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
-                        return;             //아이디 체크 디비
-                    }
-                }
-                else {
-                    if (!checkId(input_id.getText().toString())) {
-                        Toast.makeText(getApplicationContext(), "아이디를 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
-                        return;             //아이디 체크 디비
-                    }
-                }
-                if (!checkStdnum(input_id.getText().toString())/* || checked_same_id != 2*/) {
+                if (!checkId(input_id.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "아이디를 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;             //아이디 체크 디비
+                } else if (!checkId(input_id.getText().toString())/* || checked_same_id != 2*/) {
                     Toast.makeText(getApplicationContext(), "아이디(학번) 중복 체크를 확인해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 } else if(!checkName(input_nickname.getText().toString())) {
@@ -217,8 +174,8 @@ public class Register extends Activity {
                     return;
                 }
 
-                Log.i("값 확인", input_id.getText().toString() + input_id.getText().toString() + input_pwd.getText().toString() +
-                    input_nickname.getText().toString() +  input_email.getText().toString());
+                Log.i("값 확인", input_id.getText().toString() + input_pwd.getText().toString() +
+                        input_nickname.getText().toString() +  input_email.getText().toString());
 /*
                 dbm.account(input_id.getText().toString(), input_id.getText().toString(), input_pwd.getText().toString(),
                         input_name.getText().toString(), input_birth, input_ph, input_email.getText().toString());
