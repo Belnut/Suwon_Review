@@ -1,5 +1,7 @@
 package com.example.suwon_review;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,7 +39,7 @@ public class Login extends AppCompatActivity {
     {
         switch(v.getId())
         {
-            case R.id.student_login_btn:            // 학생 로그인 상황
+            case R.id.student_login_btn:            // 회원 로그인 상황
             {
                 member_type = 1;
                 if(id.getText().toString().equals("12050030") && pwd.getText().toString().equals("1q2w3e4r"))       //아이디 : 12050030, 비번 : 1q2w3e4r 로 고정
@@ -58,26 +60,37 @@ public class Login extends AppCompatActivity {
                 }
                 break;
             }
-            case R.id.resident_login_btn:           // 거주민 로그인 상황
+            case R.id.resident_login_btn:           // 비회원 로그인 상황
             {
                 member_type = 2;
-                /*if(id.getText().equals("yeonil") && pwd.toString().equals("1q2w3e4r"))       //아이디 : 12050030, 비번 : 1q2w3e4r 로 고정
-                {
-                    Intent goToMain = new Intent(this, Filter_Main.class);
-                    goToMain.putExtra("id", id.getText().toString());
-                    goToMain.putExtra("pwd", pwd.getText().toString());
+                final AlertDialog.Builder ad = new AlertDialog.Builder(Login.this);
 
-                    데이터 집어 넣는 부분 추가 필요함
+                ad.setTitle("비회원 로그인 닉네임 설정");
+                ad.setMessage("원하시는 닉네임을 입력하세요.");
 
-                    startActivity(goToMain);
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(), "아이디 또는 비밀번호를 확인해주세요.", Toast.LENGTH_LONG).show();
-                    id.setText("");
-                    pwd.setText("");
-                }*/
+                final EditText et = new EditText(Login.this);
+                ad.setView(et);
+
+                ad.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent goToMain = new Intent(getApplicationContext(), Button_Test.class);
+                        String temp_name = et.getText().toString();         // 요놈이 임시 닉네임입니다.
+
+                        startActivity(goToMain);
+                        dialog.dismiss();
+                    }
+                });
+                ad.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        dialog.dismiss();
+                    }
+                });
+                ad.show();
                 break;
+
+                //수정
             }
             case R.id.register_btn:
             {
