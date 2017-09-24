@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 public class Login extends AppCompatActivity {
 
-    static int member_type;             //사용자 구분용 변수 (권한 등등 디비에서 사용 가능)
+    static int member_type;             //사용자 구분용 변수 (권한 등등 디비에서 사용 가능)  Register = 1, Guest = 2
     EditText id;
     EditText pwd;
 
@@ -20,6 +22,9 @@ public class Login extends AppCompatActivity {
     Button resident_login;
     Button register;
     Button find_pwd;
+
+
+    DBManager dbManager ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,8 @@ public class Login extends AppCompatActivity {
         resident_login = (Button)findViewById(R.id.resident_login_btn);
         register = (Button)findViewById(R.id.register_btn);
         find_pwd = (Button)findViewById(R.id.find_pwd_btn);
+
+        dbManager = new DBManager();
     }
 
     public void onClick(View v)
@@ -95,6 +102,7 @@ public class Login extends AppCompatActivity {
             case R.id.register_btn:
             {
                 Intent goToRegister = new Intent(Login.this, Register.class);
+                goToRegister.putExtra("dbManager", (Serializable) dbManager);
                 startActivity(goToRegister);
                 break;
             }

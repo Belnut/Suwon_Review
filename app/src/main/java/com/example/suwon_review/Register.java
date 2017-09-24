@@ -20,9 +20,15 @@ import java.util.regex.Pattern;
 
 /**
  * Created by 연일 on 2017-04-11.
+ *
+ * Modified by WHJ on 2017-09-24.
+ * DB 추가
  */
 
 public class Register extends Activity {
+
+    //DB매니저
+
 
     static int member = 0;
     static int checked_same_id = 2;
