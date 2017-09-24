@@ -49,6 +49,7 @@ public class Login extends AppCompatActivity {
             case R.id.student_login_btn:            // 회원 로그인 상황
             {
                 member_type = 1;
+                /*
                 if(id.getText().toString().equals("12050030") && pwd.getText().toString().equals("1q2w3e4r"))       //아이디 : 12050030, 비번 : 1q2w3e4r 로 고정
                 {
                     Intent goToMain = new Intent(this, Button_Test.class);
@@ -65,6 +66,9 @@ public class Login extends AppCompatActivity {
                     id.setText("");
                     pwd.setText("");
                 }
+                */
+
+                dbManager.getLoginVaild(id.getText().toString(), pwd.getText().toString());
                 break;
             }
             case R.id.resident_login_btn:           // 비회원 로그인 상황

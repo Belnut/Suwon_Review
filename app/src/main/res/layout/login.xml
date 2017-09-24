@@ -65,7 +65,7 @@
             android:background="@drawable/text"
             android:ems="10"
             android:hint="아이디"
-            android:inputType="textPersonName|number" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/input_pwd"
