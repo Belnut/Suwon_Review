@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class Register extends Activity {
 
     //DB매니저
-
+    DBManager dbManager;
 
     static int member = 0;
     static int checked_same_id = 2;
@@ -42,6 +42,8 @@ public class Register extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+
+        dbManager = (DBManager)( getIntent().getSerializableExtra("dbManager") ) ;
 
         input_id = (EditText) findViewById(R.id.reg_input_id);
         input_pwd = (EditText) findViewById(R.id.reg_pwd);
@@ -182,14 +184,21 @@ public class Register extends Activity {
 
                 Log.i("값 확인", input_id.getText().toString() + input_pwd.getText().toString() +
                         input_nickname.getText().toString() +  input_email.getText().toString());
-/*
+                /*
                 dbm.account(input_id.getText().toString(), input_id.getText().toString(), input_pwd.getText().toString(),
                         input_name.getText().toString(), input_birth, input_ph, input_email.getText().toString());
                 dbm.account_table(input_id.getText().toString());
                 input_ph = "";
                 input_birth = "";
                 Toast.makeText(getApplicationContext(), "회원가입이 되었습니다.", Toast.LENGTH_SHORT).show();
-                */finish();
+                */
+
+
+                //회원가입 데이터 삽입
+                dbManager.inputRegisterData(input_id.getText().toString(), input_nickname.getText().toString(),
+                                              input_pwd.getText().toString(), input_email.getText().toString());
+
+                finish();
                 break;
             }
             case R.id.reg_cancel_btn: {

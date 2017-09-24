@@ -34,10 +34,6 @@ public class DBManager implements Serializable{
 
 
     /* PHP문 URL 주소들 */
-    private final String signin_php = "http://223.195.109.37/makeup/signin.php";
-    private final String mypageupdate_php = "http://223.195.109.37/makeup/mypageupdate.php";
-    private final String bulletininput_php = "http://223.195.109.37/makeup/bulletininput.php";
-    private final String commentinput_php = "http://223.195.109.37/makeup/commentinput.php";
     private final String PHP_REGISTER = "http://223.195.109.37/suwon_review/register.php";
 
 
@@ -82,7 +78,7 @@ public class DBManager implements Serializable{
                     con.setUseCaches(false);
                     con.setRequestMethod("POST");
 
-                    String param = "user_id=" + user_id + "&user_nicname=" + user_nicname + "&user_passwd=" + user_passwd + "&user_email" + user_email;
+                    String param = "user_id=" + user_id + "&user_nicname=" + user_nicname + "&user_passwd=" + user_passwd + "&user_email=" + user_email;
 
                     OutputStream outputStream = con.getOutputStream();
                     outputStream.write(param.getBytes());
