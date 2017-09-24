@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,6 +39,7 @@ public class DBManager implements Serializable{
     private final String PHP_REGISTER = "http://223.195.109.37/suwon_review/register.php";
 
 
+    private final String PHP_LOGIN_VAILD_CHECK = "http://223.195.109.37/suwon_review/login_check.php";
 
 
     // 집어넣거나 뺄 데이터들
@@ -47,8 +50,10 @@ public class DBManager implements Serializable{
     String comment_content, comment_userid, comment_date;
 
 
-    //Context mContext;
 
+
+
+    //STAT 정의
     private final int STAT_REGISTER = 100;
 
 
@@ -59,12 +64,11 @@ public class DBManager implements Serializable{
     //상태에 따라서 DB실행
 
 
-    /*
-    public DBManager(Context val)
-    {
-        mContext = val;
-    }
-    */
+    //FLAG 정의
+    private final int FLAG_LOGIN = 1000;
+
+    int flag;
+
 
     class Manager extends AsyncTask<Void, Void, ArrayList<String>> {
         protected ArrayList<String> doInBackground(Void... voids) {
@@ -130,4 +134,155 @@ public class DBManager implements Serializable{
         }
         return results;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //데이터 가져오는 부분
+    //goods_detail_tbl
+
+    //JSON class
+    class GetDataJSON extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String uri = params[0];
+            BufferedReader bufferedReader = null;
+            try {
+                URL url = new URL(uri);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                StringBuilder sb = new StringBuilder();
+
+                bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                String json;
+                while((json = bufferedReader.readLine())!= null){
+                    sb.append(json+"\n");
+                }
+
+                //Log.i("sb값", sb + "");
+                return sb.toString().trim();
+
+            }catch(Exception e){
+                Log.i("GetDataJson 에러", "BackGround 실행중 오류");
+                e.printStackTrace();
+                return null;
+            }
+        }
+        @Override
+        protected void onPostExecute(String result){
+            switch (flag) {
+                //로그인 검사
+                case FLAG_LOGIN: {
+                    //myJSON = result;
+                    //상태 값만 바꿔주면서 디비 실행 가능할 듯
+                    checkLogin (result);
+                    break;
+                }
+
+            }
+        }
+    }
+
+    //작업예정 , 중복검사
+    /*
+    public void getFindSameUserInfo(String compare_data, int flag)
+    {
+        this.flag = flag;
+
+        GetDataJSON g  = null;
+        if(g != null)
+            g= null;
+
+        g = new GetDataJSON();
+
+
+        if
+        g.execute(url);
+    }
+    */
+
+    //로그인 검사
+    public void getLoginVaild(String user_id, String user_passwd)
+    {
+        this.flag = FLAG_LOGIN;
+
+        GetDataJSON g  = null;
+        if(g != null)
+            g= null;
+
+        g = new GetDataJSON();
+
+        String url = PHP_LOGIN_VAILD_CHECK +"?user_id=" + user_id+ "&user_passwd=" + user_passwd;
+
+        g.execute(url);
+    }
+
+    public void getData(String url, int flag){
+        this.flag = flag;
+
+        GetDataJSON g  = null;
+        if(g != null)
+            g= null;
+
+        g = new GetDataJSON();
+        g.execute(url);
+
+    }
+
+
+    private void checkLogin(String result)
+    {
+        if (result == null)
+            Log.i("로그인", "데이터없음 (null)");
+
+        else if (result.equals("ok"))
+            Log.i("로그인", "로그인 성공");
+
+        else if (result.equals("wrong pw"))
+            Log.i("로그인", "로그인 실패(비밀번호 에러)");
+
+        else
+            Log.i("로그인", "로그인 실패(아이디 에러)");
+
+    }
+
+    /*
+    // 디비 불러오기
+    private void get_DB() {
+        String user_id, user_pw, user_nicname, user_phone, user_sex, user_birth, user_mypage;
+        try {
+            JSONObject jsonObj = new JSONObject(myJSON);
+            JSONm = jsonObj.getJSONArray(TAG_RESULTS);
+
+            for(int i = 0 ; i <  JSONm.length(); i++) {
+                JSONObject c = JSONm.getJSONObject(i);
+
+                user_id = c.getString("user_id");
+                user_pw = c.getString("user_pw");
+                user_nicname = c.getString("user_nicname");
+                user_phone = c.getString("user_phone");
+                user_sex = c.getString("user_sex");
+                user_birth = c.getString("user_birth");
+                user_mypage = c.getString("user_mypage");
+
+
+                SignOutList tmp = new SignOutList(user_id, user_pw, user_nicname, user_phone, user_sex, user_birth, user_mypage);
+                signout_list.add(tmp);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        logCheck();
+    }
+    */
 }
