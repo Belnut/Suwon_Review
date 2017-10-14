@@ -2,11 +2,13 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff4081</color>
 
-    <color name="light_gray">#FFE5E5E5</color>
-    <color name="gray">#FFCCCCCC</color>
-    <color name="black">#FF000000</color>
-    <color name="light_blue">#FF78c8e6</color>
-
+    <color name="starNormalColor">#c4c4c4</color>
+    <color name="starSelectedColor">#ffdc01</color>
+    <color name="colorMardiGras">#2D2C2D</color>
+    <color name="colorMediumPurple">#8C53E5</color>
+    <color name="colorPurpleHeart">#5E2EAA</color>
+    <color name="colorAmethyst">#824ED1</color>
+    <color name="colorCranberry">#DD467C</color>
 </resources>
