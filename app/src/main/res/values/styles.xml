@@ -1,27 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="RatingBar" parent="AppTheme">
+        <item name="colorControlNormal">@color/starNormalColor</item>
+        <item name="colorControlActivated">@color/starSelectedColor</item>
+    </style>
+
     <style name="MyButton" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/colorAccent</item>
-        <item name="colorButtonNormal">@color/light_blue</item>
+        <item name="colorControlHighlight">@color/colorMediumPurple</item>
+        <item name="colorButtonNormal">@color/colorPurpleHeart</item>
     </style>
-
-    <style name="AppThemeWithColor" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="background">@color/themecolor</item>
-    </style>
-
-    <declare-styleable name="FlowLayout">
-        <attr name="android:gravity" />
-    </declare-styleable>
-    <declare-styleable name="FlowLayout_Layout">
-        <attr name="android:layout_gravity" />
-    </declare-styleable>
-
 </resources>
