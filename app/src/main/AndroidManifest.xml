@@ -22,8 +22,14 @@
         <activity android:name=".Button_Test"/>
         <activity android:name=".Find_Id_Pwd"/>
         <activity android:name=".Register"/>
-        <activity android:name=".Suggestion_board"/>
         <activity android:name=".Filter_Main"/>
+        <activity android:name=".DeliveryActivity" />
+        <activity android:name=".ResActivity" />
+        <activity android:name=".RecommendActivity" />
+        <activity android:name=".ReviewActivity" />
+        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".VerticalSampleActivity"/>
+        <activity android:name=".FeedBack"/>
 
         <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
