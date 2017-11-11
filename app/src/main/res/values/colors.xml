@@ -11,4 +11,9 @@
     <color name="colorPurpleHeart">#5E2EAA</color>
     <color name="colorAmethyst">#824ED1</color>
     <color name="colorCranberry">#DD467C</color>
+
+    <color name="light_blue">#FF78c8e6</color>
+    <color name="light_gray">#FFE5E5E5</color>
+    <color name="gray">#FFCCCCCC</color>
+    <color name="black">#FF000000</color>
 </resources>

@@ -31,9 +31,6 @@ public class Button_Test extends Activity {
         switch(v.getId())
         {
             case R.id.suggestion_board_btn: {
-                Log.e("1111111111", "1111111111");
-                Intent sug_board = new Intent(this, Suggestion_board.class);
-                startActivity(sug_board);
                 break;
             }
             case R.id.filter_test_btn:{
